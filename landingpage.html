@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>allhands.team</title>
+  <style>
+    body {
+      background-color: #F8F8F8;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    input[type="email"] {
+      width: 100%;
+      max-width: 300px;
+      padding: 10px;
+      border: none;
+      border-radius: 3px;
+      margin-bottom: 20px;
+    }
+
+    input[type="submit"] {
+      width: 100%;
+      max-width: 300px;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: #FFFFFF;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45A049;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>All-Hands is not just a large corporate meeting. It's more than that. Join the waitlist.</h1>
+    <form action="#" method="post">
+      <input id="emailInput" type="email" name="email" placeholder="Enter your email address" required>
+      <input type="submit" value="Join">
+    </form>
+  </div>
+  <script>
+    document.querySelector('form').addEventListener('submit', function (event) {
+      event.preventDefault();
+      var email = document.getElementById('emailInput').value;
+      alert('Thank you for subscribing! Your email address is: ' + email);
+      // Define the API endpoint URL
+      const apiUrl = "https://us-east-1.aws.data.mongodb-api.com/app/application-0-mempw/endpoint/addInnovatorContact";
+
+      // Create a data object with the email address
+      const data = { email: email };
+
+      // Fetch options for the POST request
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      };
+
+      // Make the POST request to the API endpoint
+      fetch(apiUrl, options)
+        .then(response => {
+          if (response.ok) {
+            return response;
+          } else {
+            throw new Error('Failed to subscribe. Please try again later.'); // Customize error message as needed
+          }
+        })
+        .then(data => {
+          console.log('Successfully subscribed:', data); // Replace with desired success action
+        })
+        .catch(error => {
+          console.error('Error:', error); // Replace with desired error action
+        });
+
+      // You can further process the email address as needed (e.g. send it to a server for subscription)
+    });
+  </script>
+</body>
+
+</html>
